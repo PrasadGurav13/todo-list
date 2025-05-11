@@ -56,3 +56,13 @@ export const deleteTask = async (req: Request, res: Response) => {
 
   res.status(204).send();
 };
+
+export const healthCheck = async (_req: Request, res: Response) => {
+  try {
+    await prisma.$queryRaw`SELECT 1`; // simple query to test connection
+    res.json({ status: 'Database connected' });
+  } catch (err) {
+    console.error('DB connection error:', err);
+    res.status(500).json({ status: 'Database not connected' });
+  }
+};
