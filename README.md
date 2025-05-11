@@ -19,7 +19,7 @@ A simple full-stack task management app using React, TypeScript, Express, Prisma
 
 ### 1. Clone the Repository
 
-git clone https://github.com/your-username/todo-list.git
+git clone https://github.com/PrasadGurav13/todo-list.git
 cd todo-list
 
 ### 2. Set Up Backend
