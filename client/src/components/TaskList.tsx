@@ -11,32 +11,27 @@ const TaskList = ({ tasks, onDelete, onToggle }: Props) => {
   if (!tasks.length) return <p>No tasks available.</p>;
 
   return (
-    <ul className="space-y-3">
-      {tasks.map((task) => (
-        <li
-          key={task.id}
-          className="flex justify-between items-center bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition"
-        >
-          <span className={`text-lg ${task.status === 'Complete' ? 'line-through text-green-600' : 'text-gray-800'}`}>
+    <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4'>
+      {tasks.map((task)=> (
+        <div key={task.id} className={`${task.status === 'Complete' ? 'bg-green-100' : 'bg-white'} p-4 rounded-lg shadow-sm hover:shadow-md transition flex flex-col justify-between h-full`}>
+          <span className={`text-xl mb-4 text-gray-800 ${task.status === 'Complete' ? 'line-through' : ''}`}>
             {task.title}
           </span>
-  
-          <div className="flex items-center gap-2 min-w-[160px]">
-            <label className="inline-flex items-center">
-              <input
-                type="checkbox"
-                checked={task.status === 'Complete'}
-                onChange={() => onToggle(task)}
-                className="h-5 w-5 text-green-600 border-gray-300 rounded focus:ring-green-500"
-              />
-            </label>
-  
-            <Link to={`/edit/${task.id}`}>
-              <button className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600 transition text-sm">
+          <div className="flex items-center justify-between mt-auto">
+          <label className="inline-flex items-center">
+            <input
+              type="checkbox"
+              checked={task.status === 'Complete'}
+              onChange={() => onToggle(task)}
+              className="h-5 w-5 text-green-600 border-gray-300 rounded focus:ring-green-500"
+            />
+          </label>
+          <div className="flex gap-2">
+          <Link to={`/edit/${task.id}`}>
+              <button className="bg-blue-500 text-white px-3 py-2 rounded hover:bg-blue-600 transition text-sm">
                 Edit
               </button>
             </Link>
-  
             <button
               className="bg-red-500 text-white p-2 rounded hover:bg-red-600 transition"
               onClick={() => onDelete(task.id)}
@@ -57,9 +52,10 @@ const TaskList = ({ tasks, onDelete, onToggle }: Props) => {
               </svg>
             </button>
           </div>
-        </li>
+          </div>
+        </div>
       ))}
-    </ul>
+    </div>
   );
 };  
 
